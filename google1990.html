@@ -1,0 +1,133 @@
+<html><head><base href="." />
+<title>Google circa 1990</title>
+<style>
+body {
+    background-color: #000;
+    color: #00ff00;
+    font-family: "Courier New", monospace;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.4;
+}
+
+.terminal {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 12px;
+    white-space: pre;
+}
+
+.search-box {
+    background: #000;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 5px;
+    width: 80%;
+    margin-bottom: 20px;
+    font-family: "Courier New", monospace;
+}
+
+.search-btn {
+    background: #000;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-family: "Courier New", monospace;
+}
+
+.blink {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.loading {
+    margin-top: 20px;
+    display: none;
+}
+
+</style>
+</head>
+<body>
+<div class="terminal">
+    <div class="logo">
+    ██████╗  ██████╗  ██████╗  ██████╗ ██╗     ███████╗
+   ██╔════╝ ██╔═══██╗██╔═══██╗██╔════╝ ██║     ██╔════╝
+   ██║  ███╗██║   ██║██║   ██║██║  ███╗██║     █████╗  
+   ██║   ██║██║   ██║██║   ██║██║   ██║██║     ██╔══╝  
+   ╚██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝███████╗███████╗
+    ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝ ╚══════╝╚══════╝
+    </div>
+    
+    <div style="text-align: center;">
+        <p>GOOGLE SEARCH ENGINE v0.9 BETA</p>
+        <p>Copyright (c) 1990 - All Rights Reserved</p>
+        <p>Connected to ARPANET at 9600 baud</p>
+        <br>
+        <input type="text" class="search-box" placeholder="ENTER SEARCH QUERY...">
+        <button class="search-btn" onclick="search()">SEARCH</button>
+        <div class="loading">
+            <p>CONNECTING TO HOST...<span class="blink">█</span></p>
+            <p>INDEXING GOPHER SERVERS...</p>
+            <p>SCANNING USENET GROUPS...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function search() {
+    const query = document.querySelector('.search-box').value;
+    const loading = document.querySelector('.loading');
+    
+    if (query.trim() !== '') {
+        loading.style.display = 'block';
+        
+        // Simulate old-school loading
+        let results = `
+            <p>SEARCH RESULTS FOR: ${query}</p>
+            <p>--------------------------------</p>
+            <p>ERROR 0x45: INSUFFICIENT MEMORY</p>
+            <p>AVAILABLE RAM: 640K</p>
+            <p>REQUIRED RAM: 2MB</p>
+            <p>--------------------------------</p>
+            <p>SUGGESTION: Please upgrade your system</p>
+            <p>Recommended: IBM PS/2 or compatible</p>
+            <p>with Extended Memory Support</p>
+            <span class="blink">Press any key to continue...</span>
+        `;
+        
+        setTimeout(() => {
+            loading.innerHTML = results;
+        }, 2000);
+    }
+}
+
+// Easter egg: Konami code handler
+let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+            document.body.style.background = 'blue';
+            alert('BLUE SCREEN OF DEATH:\nA fatal exception has occurred at 0028:C0011E7B\nThe current application will be terminated.\n\nPress any key to terminate the application.\nPress CTRL+ALT+DEL to restart your computer.');
+            konamiIndex = 0;
+        }
+    } else {
+        konamiIndex = 0;
+    }
+});
+</script>
+</body></html>
